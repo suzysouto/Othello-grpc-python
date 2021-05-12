@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package chat;
+
+service Chat {
+  rpc SendMessage (ChatMessage) returns (Empty);
+  rpc ReceiveMessage(Empty) returns (stream ChatMessage);
+  rpc CoresDisponiveis(Empty) returns (Cores);
+  rpc ChoiceColor(Cor) returns (Status);
+  rpc TurnoAtual(Empty) returns (Cor);
+  rpc TrocarDeTurno(Cor) returns (Status); 
+  rpc TabuleiroAtual(Empty) returns (Tabuleiro);
+  rpc ChangeTabuleiro(Pos) returns (Status);
+  rpc RefreshTabuleiro(Empty) returns (stream Empty);
+}
+
+message ChatMessage {
+  string name = 1;
+  string message = 2;
+}
+
+message Cores {
+  repeated int32 data = 1 [packed=true];
+}
+
+message Cor {
+  int32 cor = 1;
+}
+
+message Status {
+  bool status = 1;
+}
+
+message Pos {
+  int32 cor = 1;
+  repeated int32 pos = 2 [packed=true];
+}
+
+message Tabuleiro {
+  repeated int32 line1 = 1 [packed=true];
+  repeated int32 line2 = 2 [packed=true];
+  repeated int32 line3 = 3 [packed=true];
+  repeated int32 line4 = 4 [packed=true];
+  repeated int32 line5 = 5 [packed=true];
+  repeated int32 line6 = 6 [packed=true];
+  repeated int32 line7 = 7 [packed=true];
+  repeated int32 line8 = 8 [packed=true];
+}
+
+message Empty {}
+
